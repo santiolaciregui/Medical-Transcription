@@ -1,0 +1,7 @@
+{
+  "name": "MedScribe AI - Medical Report Transcriber",
+  "description": "A high-precision medical voice-to-document application that transcribes medical voice reports into structured clinical documents with AI-powered refinement.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
