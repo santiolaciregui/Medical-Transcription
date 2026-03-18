@@ -5,6 +5,7 @@ export interface TranscriptionResult {
 }
 
 export interface StructuredReport {
+  studyName?: string;
   patientInfo?: string;
   clinicalHistory?: string;
   findings?: string;

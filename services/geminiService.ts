@@ -1,14 +1,33 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
+import OpenAI from "openai";
 import { StructuredReport } from "../types";
 
-const getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+const getGeminiAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+
+const getOpenAI = () => new OpenAI({ apiKey: process.env.API_KEY || '', dangerouslyAllowBrowser: true });
 
 /**
- * Transcribes audio data using gemini-3-flash-preview
+ * Transcribes audio data using OpenAI Whisper or Gemini as fallback
  */
-export async function transcribeAudio(base64Audio: string, mimeType: string): Promise<string> {
-  const ai = getAI();
+export async function transcribeAudio(base64Audio: string, mimeType: string, file?: File): Promise<string> {
+  const openai = getOpenAI();
+  
+  if (openai && file) {
+    try {
+      const response = await openai.audio.transcriptions.create({
+        file: file,
+        model: "whisper-1",
+        prompt: "El orador puede cometer errores, dudar o corregirse a sí mismo. Ignora las muletillas. Interpreta la puntuación como 'punto aparte', 'punto seguido', 'coma', etc.",
+      });
+      return response.text;
+    } catch (e) {
+      console.error("OpenAI transcription failed, falling back to Gemini", e);
+      // Fallback to Gemini
+    }
+  }
+
+  const ai = getGeminiAI();
   const response = await ai.models.generateContent({
     model: 'gemini-3-flash-preview',
     contents: {
@@ -52,10 +71,52 @@ export async function transcribeAudio(base64Audio: string, mimeType: string): Pr
 }
 
 /**
- * Refines raw transcription into a structured medical report using gemini-3-pro-preview with Thinking Mode
+ * Refines raw transcription into a structured medical report using OpenAI or Gemini
  */
 export async function refineMedicalReport(rawText: string): Promise<StructuredReport> {
-  const ai = getAI();
+  const openai = getOpenAI();
+  
+  if (openai) {
+    try {
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          {
+            role: "system",
+            content: `Convierte la siguiente transcripción médica en un reporte estructurado.
+El texto ya ha sido limpiado y puntuado. Tu trabajo es organizarlo en secciones profesionales.
+Usa terminología médica profesional.
+Identifica y separa la información en estas categorías: 
+- Nombre del estudio (Título principal del examen)
+- Identificación del Paciente (si se menciona)
+- Antecedentes/Historia Clínica
+- Hallazgos/Exploración
+- Impresión Diagnóstica
+- Plan/Recomendaciones
+
+Debes responder ÚNICAMENTE con un objeto JSON válido con las siguientes claves:
+"studyName", "patientInfo", "clinicalHistory", "findings", "diagnosis", "plan".`
+          },
+          {
+            role: "user",
+            content: rawText
+          }
+        ],
+        response_format: { type: "json_object" }
+      });
+      
+      const data = JSON.parse(response.choices[0].message.content || "{}");
+      return {
+        ...data,
+        originalText: rawText
+      };
+    } catch (e) {
+      console.error("OpenAI refinement failed, falling back to Gemini", e);
+      // Fallback to Gemini
+    }
+  }
+
+  const ai = getGeminiAI();
   const response = await ai.models.generateContent({
     model: 'gemini-3-pro-preview',
     contents: `
@@ -63,6 +124,7 @@ export async function refineMedicalReport(rawText: string): Promise<StructuredRe
       El texto ya ha sido limpiado y puntuado. Tu trabajo es organizarlo en secciones profesionales.
       Usa terminología médica profesional.
       Identifica y separa la información en estas categorías: 
+      - Nombre del estudio (Título principal del examen)
       - Identificación del Paciente (si se menciona)
       - Antecedentes/Historia Clínica
       - Hallazgos/Exploración
@@ -78,13 +140,14 @@ export async function refineMedicalReport(rawText: string): Promise<StructuredRe
       responseSchema: {
         type: Type.OBJECT,
         properties: {
+          studyName: { type: Type.STRING, description: "El nombre o título del examen/estudio médico." },
           patientInfo: { type: Type.STRING, description: "Nombre del paciente, edad, etc." },
           clinicalHistory: { type: Type.STRING, description: "Síntomas y antecedentes." },
           findings: { type: Type.STRING, description: "Resultados de exámenes o hallazgos físicos." },
           diagnosis: { type: Type.STRING, description: "Evaluación o diagnóstico presuntivo." },
           plan: { type: Type.STRING, description: "Tratamiento y seguimiento." },
         },
-        required: ["findings", "diagnosis", "plan"],
+        required: ["studyName", "findings", "diagnosis", "plan"],
       }
     },
   });
@@ -98,6 +161,7 @@ export async function refineMedicalReport(rawText: string): Promise<StructuredRe
   } catch (e) {
     console.error("Failed to parse AI response as JSON", e);
     return {
+      studyName: "INFORME MÉDICO",
       findings: "Error procesando la estructura del reporte.",
       diagnosis: "No se pudo estructurar la información.",
       plan: "Por favor revise el texto de la transcripción.",

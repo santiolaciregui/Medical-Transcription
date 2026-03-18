@@ -8,7 +8,14 @@ const App: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [report, setReport] = useState<StructuredReport | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [openAiKey, setOpenAiKey] = useState(() => localStorage.getItem('openai_api_key') || '');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const saveSettings = () => {
+    localStorage.setItem('openai_api_key', openAiKey);
+    setIsSettingsOpen(false);
+  };
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -35,7 +42,7 @@ const App: React.FC = () => {
 
       // 1. Transcription (Flash) - Interprets punctuation like "punto aparte"
       setStatus(AppStatus.TRANSCRIBING);
-      const rawText = await transcribeAudio(base64Audio, file.type);
+      const rawText = await transcribeAudio(base64Audio, file.type, file);
 
       // 2. Refinement (Pro + Thinking) - Structures for UI display
       setStatus(AppStatus.REFINING);
@@ -53,22 +60,71 @@ const App: React.FC = () => {
   const downloadDoc = () => {
     if (!report) return;
 
-    // We use originalText which contains the cleaned transcription with interpreted punctuation
-    const formattedText = report.originalText.replace(/\n/g, '<br/>');
+    // DEFINIMOS LA SANGRÍA MANUAL
+    const sangria = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'; 
+
+    const formattedText = report.originalText
+        // 1. Limpiamos saltos de línea previos para procesar todo como texto continuo
+        .replace(/\n/g, ' ') 
+        
+        // 2. DIVISIÓN INTELIGENTE (REGEX):
+        // \.      -> Busca un punto literal.
+        // (?!\d)  -> "Negative Lookahead": Significa "que NO esté seguido de un dígito".
+        // Esto separa oraciones, pero ignora "1.5", "3.0", etc.
+        .split(/\.(?!\d)/) 
+        
+        .filter(fragment => {
+            const trimmed = fragment.trim();
+            if (!trimmed) return false;
+            if (trimmed.toLowerCase().includes('informe de')) return false;
+            if (trimmed.toLowerCase().includes('paciente:')) return false;
+            return true;
+        })
+        .map(fragment => {
+            // Como el split "se come" el punto, lo volvemos a poner al final.
+            const line = fragment.trim() + '.'; 
+            return `<p class="doc-paragraph">${sangria}${line}</p>`;
+        })
+        .join(''); 
 
     const content = `
       <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-      <head><meta charset='utf-8'><title>Transcripción Médica</title></head>
+      <head>
+        <meta charset='utf-8'>
+        <title>Reporte Médico</title>
+        <style>
+          p, div { margin: 0; padding: 0; }
+          
+          .doc-paragraph {
+              margin: 0;
+              line-height: 1.0; 
+              text-align: justify; 
+              font-size: 12pt;
+          }
+
+          .study-name { text-decoration: underline; font-weight: bold; font-size: 14pt; margin-bottom: 20px; text-transform: uppercase; }
+          .content { font-family: 'Arial', sans-serif; margin-top: 10px; }
+          .signature-atte { text-align: center; margin-top: 40px; font-weight: bold; }
+          .signature-details { text-align: right; margin-top: 10px; font-size: 11pt; }
+        </style>
+      </head>
       <body>
-        <div style="font-family: 'Arial', sans-serif; max-width: 800px; margin: auto; padding: 20px;">
-          <h1 style="text-align:center; color:#1e293b; border-bottom: 2px solid #3b82f6; padding-bottom: 10px;">REPORTE DE TRANSCRIPCIÓN MÉDICA</h1>
-          <p style="text-align: right; font-size: 12px; color: #64748b;">Fecha: ${new Date().toLocaleDateString()}</p>
-          <div style="margin-top: 30px; line-height: 1.6; color: #334155; font-size: 14pt;">
-            ${formattedText}
-          </div>
-          <br/><br/>
-          <hr style="border: 0; border-top: 1px solid #e2e8f0;" />
-          <p style="font-size: 10px; color: #94a3b8; text-align: center;">Documento generado automáticamente por MedScribe AI</p>
+        <div class="study-name">
+          ${report.studyName || 'REPORTE MÉDICO'}
+        </div>
+        
+        <div class="content">
+          ${formattedText}
+        </div>
+
+        <div class="signature-atte">
+          ATTE
+        </div>
+
+        <div class="signature-details">
+          Dr. Rubén Luis Brodsky<br/>
+          Especialista en Radiología<br/>
+          M.N. 63574 - M.P. 1601
         </div>
       </body>
       </html>
@@ -77,11 +133,14 @@ const App: React.FC = () => {
     const blob = new Blob(['\ufeff', content], {
       type: 'application/msword'
     });
+    
+    
+    
 
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Transcripcion_Medica_${new Date().getTime()}.doc`;
+    link.download = `${(report.studyName || 'Transcripcion').replace(/\s+/g, '_')}_${new Date().getTime()}.doc`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -95,7 +154,55 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col items-center py-12 px-4">
+    <div className="min-h-screen bg-slate-50 flex flex-col items-center py-12 px-4 relative">
+      <div className="absolute top-4 right-4">
+        <button 
+          onClick={() => setIsSettingsOpen(true)}
+          className="p-2 text-slate-400 hover:text-slate-600 transition-colors bg-white rounded-full shadow-sm border border-slate-200"
+          title="Configuración"
+        >
+          <i className="fa-solid fa-gear text-xl"></i>
+        </button>
+      </div>
+
+      {isSettingsOpen && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-slate-100">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold text-slate-800">Configuración</h2>
+              <button onClick={() => setIsSettingsOpen(false)} className="text-slate-400 hover:text-slate-600">
+                <i className="fa-solid fa-xmark text-xl"></i>
+              </button>
+            </div>
+            <div className="mb-6">
+              <label className="block text-sm font-bold text-slate-700 mb-2">OpenAI API Key (Opcional)</label>
+              <p className="text-xs text-slate-500 mb-3">Si se proporciona, se usará OpenAI (Whisper y GPT-4o) con prioridad. Si se deja en blanco o falla, se usará Gemini como respaldo.</p>
+              <input 
+                type="password" 
+                value={openAiKey}
+                onChange={(e) => setOpenAiKey(e.target.value)}
+                placeholder="sk-..."
+                className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+              />
+            </div>
+            <div className="flex justify-end space-x-3">
+              <button 
+                onClick={() => setIsSettingsOpen(false)}
+                className="px-5 py-2.5 rounded-xl font-medium text-slate-600 hover:bg-slate-100 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button 
+                onClick={saveSettings}
+                className="px-5 py-2.5 rounded-xl font-medium bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200"
+              >
+                Guardar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <header className="max-w-4xl w-full mb-12 text-center">
         <div className="flex items-center justify-center space-x-3 mb-4">
           <div className="bg-blue-600 p-3 rounded-2xl shadow-lg shadow-blue-200">
@@ -124,7 +231,7 @@ const App: React.FC = () => {
             </div>
             <h2 className="text-2xl font-bold text-slate-800 mb-2">Subir Audio Médico</h2>
             <p className="text-slate-500 max-w-sm mx-auto">
-              Sube tu archivo de voz. Se interpretarán comandos como "punto aparte" y "punto y coma".
+              Sube tu archivo de voz. Se interpretarán comandos y correcciones automáticamente.
             </p>
           </div>
         )}
@@ -141,8 +248,8 @@ const App: React.FC = () => {
               {status === AppStatus.REFINING && 'Analizando Contenido...'}
             </h3>
             <p className="text-slate-500 italic max-w-md mx-auto">
-              {status === AppStatus.TRANSCRIBING && 'Limpiando comandos de puntuación y convirtiendo voz a texto profesional.'}
-              {status === AppStatus.REFINING && 'Organizando la información para visualización estructurada.'}
+              {status === AppStatus.TRANSCRIBING && 'Procesando correcciones de voz y puntuación clínica.'}
+              {status === AppStatus.REFINING && 'Identificando el nombre del estudio y estructurando secciones.'}
             </p>
           </div>
         )}
@@ -165,10 +272,13 @@ const App: React.FC = () => {
           <div className="space-y-6">
             <div className="bg-white rounded-3xl p-8 shadow-xl shadow-slate-200 border border-slate-100">
               <div className="flex items-center justify-between mb-8 pb-4 border-b border-slate-100">
-                <h2 className="text-2xl font-bold text-slate-900 flex items-center">
-                  <i className="fa-solid fa-file-medical text-blue-600 mr-3"></i>
-                  Reporte Generado
-                </h2>
+                <div className="flex flex-col">
+                  <span className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-1">Estudio Detectado</span>
+                  <h2 className="text-2xl font-bold text-slate-900 flex items-center">
+                    <i className="fa-solid fa-file-medical text-blue-600 mr-3"></i>
+                    {report.studyName}
+                  </h2>
+                </div>
                 <div className="flex space-x-2">
                   <button 
                     onClick={downloadDoc}
@@ -195,21 +305,21 @@ const App: React.FC = () => {
                 </div>
               )}
 
-              {/* Structured View in UI for convenience */}
               <div className="grid grid-cols-1 gap-6">
                 <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200">
-                  <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Texto de Transcripción (Formateado)</h3>
+                  <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Texto Final de la Transcripción</h3>
                   <div className="text-slate-800 leading-relaxed whitespace-pre-wrap text-lg">
                     {report.originalText}
                   </div>
                 </div>
 
                 <div className="mt-4">
-                  <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Resumen Estructurado</h3>
+                  <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-4">Resumen de Análisis</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {report.patientInfo && (
                       <MiniSection title="Paciente" content={report.patientInfo} icon="fa-user" />
                     )}
+                    <MiniSection title="Hallazgos" content={report.findings} icon="fa-stethoscope" />
                     <MiniSection title="Diagnóstico" content={report.diagnosis} icon="fa-microscope" />
                     <MiniSection title="Plan" content={report.plan} icon="fa-clipboard-check" />
                   </div>
@@ -221,7 +331,7 @@ const App: React.FC = () => {
       </main>
 
       <footer className="mt-auto pt-12 pb-6 text-slate-400 text-sm">
-        <p>© 2024 MedScribe AI. Interfaz Segura para Documentación Clínica.</p>
+        <p>© 2024 MedScribe AI. Firmado por Dr. Rubén Luis Brodsky.</p>
       </footer>
     </div>
   );

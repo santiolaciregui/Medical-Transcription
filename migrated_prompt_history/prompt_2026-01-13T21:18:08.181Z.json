@@ -1,0 +1,411 @@
+[
+  {
+    "id": 13,
+    "author": "user",
+    "payload": {
+      "type": "text",
+      "text": "Necesito crear una aplicación que cargando un archivo de audio, transcriba todo el contenido del audio. Estos audios son informes médicos realizados por voz, los cuales luego deben de ser trancriptos. El resultado, debe ser un documento .doc disponible para descargarse",
+      "files": [
+        "{\"name\":\"Transcribe audio\",\"type\":\"text/plain\",\"size\":248,\"lastModified\":1768327410504,\"data\":\"LS0tCnR5cGU6ICJmZWF0dXJlIgp0aXRsZTogIlRyYW5zY3JpYmUgYXVkaW8iCmljb246ICJzcGVlY2hfdG9fdGV4dCIKLS0tCgpBZGQgYSBmZWF0dXJlIHdoZXJlIHVzZXJzIGNhbiBpbnB1dCBhdWRpbyB3aXRoIHRoZWlyIG1pY3JvcGhvbmUgYW5kIHRoZSBhcHAgd2l0aCB0cmFuc2NyaWJlIGl0LiBZb3UgTVVTVCBhZGQgYXVkaW8gdHJhbnNjcmlwdGlvbiB0byB0aGUgYXBwIHVzaW5nIG1vZGVsIGdlbWluaS0zLWZsYXNoLXByZXZpZXc=\"}",
+        "{\"name\":\"Think more when needed\",\"type\":\"text/plain\",\"size\":309,\"lastModified\":1768327410505,\"data\":\"LS0tCnR5cGU6ICJmZWF0dXJlIgp0aXRsZTogIlRoaW5rIG1vcmUgd2hlbiBuZWVkZWQiCmljb246ICJuZXR3b3JrX2ludGVsbGlnZW5jZSIKLS0tCgpZb3UgTVVTVCBhZGQgdGhpbmtpbmcgbW9kZSB0byB0aGUgYXBwIHdoZXJlIHJlbGV2YW50IHRvIGhhbmRsZSB1c2VycycgbW9zdCBjb21wbGV4IHF1ZXJpZXMuIFlvdSBNVVNUIHVzZSB0aGUgZ2VtaW5pLTMtcHJvLXByZXZpZXcgbW9kZWwgYW5kIHNldCBgdGhpbmtpbmdCdWRnZXRgIHRvIDMyNzY4IChtYXggZm9yIGdlbWluaSAzIHBybykuIERvIG5vdCBzZXQgYG1heE91dHB1dFRva2Vuc2Au\"}"
+      ],
+      "fileUploads": [],
+      "cMarkNode": {}
+    },
+    "createdTimestamp": {
+      "seconds": 1768327410,
+      "nanos": 719000000
+    }
+  },
+  {
+    "id": 14,
+    "author": "model",
+    "payload": {
+      "type": "thinking",
+      "text": "**Conceptualizing the React App**\n\nI'm now focusing on the React application's core functionality. I'm prioritizing the audio upload and transcription steps, leveraging the Gemini API. I need to figure out how to best structure the medical report output and enable downloadable reports. I'm exploring different libraries for the file upload, transcription handling, and report generation.\n\n\n**Designing User Input and Output**\n\nI'm now zeroing in on the user interface specifics. I want to add microphone input alongside file upload, thinking mode using the powerful `gemini-3-pro-preview` with a high `thinkingBudget`, and a focus on world-class senior front-end design using Tailwind CSS. I'm prioritizing generating a clean `.doc` output, I'm leaning toward the `docx` library but if there are limitations, I can create a robust blob-based download.\n\n\n**Refining the UI Components**\n\nI'm now deep-diving into the UI components. I'm focusing on the upload area, audio player, real-time transcription display, and structured medical report editor. I will implement action buttons for download, copy, and restart, all using Tailwind CSS. I have outlined the core steps: audio-to-base64, transcription using `gemini-3-flash-preview`, and report refinement with the `gemini-3-pro-preview` model, all using a high `thinkingBudget`. I am planning on using `docx` for `.doc` report generation.\n\n\n**Confirming Report Generation Strategy**\n\nI've decided to use a blob-based approach for generating `.doc` reports, as a full `docx` implementation seems complex without a dedicated library. I'll stick with HTML-to-Word to ensure reliability. I'm confirming that the \"Thinking mode\" will use `gemini-3-pro-preview` for formatting, and `gemini-3-flash-preview` is ideal for transcription. I am also planning the visuals - I am leaning towards blues, teals, and clean whites. I am building the structure: Patient Identification, Clinical History, Physical Examination, Diagnostic Impression, and Treatment Plan.\n\n\n",
+      "cMarkNode": {}
+    },
+    "createdTimestamp": {
+      "seconds": 1768327410,
+      "nanos": 719000000
+    },
+    "doneTimestamp": {
+      "seconds": 1768327420,
+      "nanos": 171000000
+    }
+  },
+  {
+    "id": 15,
+    "author": "model",
+    "payload": {
+      "type": "generationTable",
+      "entries": [
+        {
+          "path": "metadata.json",
+          "generationType": 0,
+          "isDone": true,
+          "description": "Application metadata including name, description and required permissions for camera/microphone access.",
+          "diffs": [
+            {
+              "target": "",
+              "replacement": "\n{\n  \"name\": \"MedScribe AI - Medical Report Transcriber\",\n  \"description\": \"A high-precision medical voice-to-document application that transcribes medical voice reports into structured clinical documents with AI-powered refinement.\",\n  \"requestFramePermissions\": [\n    \"microphone\"\n  ]\n}\n"
+            }
+          ]
+        },
+        {
+          "path": "index.html",
+          "generationType": 0,
+          "isDone": true,
+          "description": "Main HTML entry point with Tailwind CSS and Font Awesome for iconography.",
+          "diffs": [
+            {
+              "target": "",
+              "replacement": "\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>MedScribe AI</title>\n    <script src=\"https://cdn.tailwindcss.com\"></script>\n    <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css\">\n    <link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap\" rel=\"stylesheet\">\n    <style>\n        body {\n            font-family: 'Inter', sans-serif;\n            background-color: #f8fafc;\n        }\n    </style>\n</head>\n<body>\n    <div id=\"root\"></div>\n</body>\n</html>\n"
+            }
+          ]
+        },
+        {
+          "path": "index.tsx",
+          "generationType": 0,
+          "isDone": true,
+          "description": "React entry point using the latest React 18+ API.",
+          "diffs": [
+            {
+              "target": "",
+              "replacement": "\nimport React from 'react';\nimport ReactDOM from 'react-dom/client';\nimport App from './App';\n\nconst rootElement = document.getElementById('root');\nif (!rootElement) {\n  throw new Error(\"Could not find root element to mount to\");\n}\n\nconst root = ReactDOM.createRoot(rootElement);\nroot.render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>\n);\n"
+            }
+          ]
+        },
+        {
+          "path": "types.ts",
+          "generationType": 0,
+          "isDone": true,
+          "description": "Global type definitions for the application.",
+          "diffs": [
+            {
+              "target": "",
+              "replacement": "\nexport interface TranscriptionResult {\n  rawText: string;\n  structuredReport: StructuredReport;\n}\n\nexport interface StructuredReport {\n  patientInfo?: string;\n  clinicalHistory?: string;\n  findings?: string;\n  diagnosis?: string;\n  plan?: string;\n  originalText: string;\n}\n\nexport enum AppStatus {\n  IDLE = 'IDLE',\n  UPLOADING = 'UPLOADING',\n  TRANSCRIBING = 'TRANSCRIBING',\n  REFINING = 'REFINING',\n  COMPLETED = 'COMPLETED',\n  ERROR = 'ERROR'\n}\n"
+            }
+          ]
+        },
+        {
+          "path": "services/geminiService.ts",
+          "generationType": 0,
+          "isDone": true,
+          "description": "Service layer for interacting with Gemini API models for transcription and medical report refinement.",
+          "diffs": [
+            {
+              "target": "",
+              "replacement": "\nimport { GoogleGenAI, Type } from \"@google/genai\";\nimport { StructuredReport } from \"../types\";\n\nconst getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });\n\n/**\n * Transcribes audio data using gemini-3-flash-preview\n */\nexport async function transcribeAudio(base64Audio: string, mimeType: string): Promise<string> {\n  const ai = getAI();\n  const response = await ai.models.generateContent({\n    model: 'gemini-3-flash-preview',\n    contents: {\n      parts: [\n        {\n          inlineData: {\n            mimeType: mimeType,\n            data: base64Audio,\n          },\n        },\n        {\n          text: \"Transcribe this medical voice report verbatim. Include all technical medical terms accurately. Do not add any formatting yet, just provide the full raw text.\",\n        },\n      ],\n    },\n  });\n\n  return response.text || \"\";\n}\n\n/**\n * Refines raw transcription into a structured medical report using gemini-3-pro-preview with Thinking Mode\n */\nexport async function refineMedicalReport(rawText: string): Promise<StructuredReport> {\n  const ai = getAI();\n  const response = await ai.models.generateContent({\n    model: 'gemini-3-pro-preview',\n    contents: `\n      Convert the following raw medical transcription into a structured medical report.\n      Use professional medical terminology. \n      Identify and separate information into these categories: \n      - Patient Identification (if mentioned)\n      - Clinical History\n      - Physical Examination/Findings\n      - Diagnostic Impression\n      - Treatment Plan/Recommendations\n\n      Raw Transcription:\n      ${rawText}\n    `,\n    config: {\n      thinkingConfig: { thinkingBudget: 32768 },\n      responseMimeType: \"application/json\",\n      responseSchema: {\n        type: Type.OBJECT,\n        properties: {\n          patientInfo: { type: Type.STRING, description: \"Patient name, age, etc.\" },\n          clinicalHistory: { type: Type.STRING, description: \"Symptoms and background.\" },\n          findings: { type: Type.STRING, description: \"Physical exam or test results.\" },\n          diagnosis: { type: Type.STRING, description: \"Assessment or diagnosis.\" },\n          plan: { type: Type.STRING, description: \"Treatment and follow-up.\" },\n        },\n        required: [\"findings\", \"diagnosis\", \"plan\"],\n      }\n    },\n  });\n\n  try {\n    const data = JSON.parse(response.text || \"{}\");\n    return {\n      ...data,\n      originalText: rawText\n    };\n  } catch (e) {\n    console.error(\"Failed to parse AI response as JSON\", e);\n    return {\n      findings: \"Error processing report structure.\",\n      diagnosis: \"Could not structure data.\",\n      plan: \"Please review raw text.\",\n      originalText: rawText\n    };\n  }\n}\n"
+            }
+          ]
+        },
+        {
+          "path": "App.tsx",
+          "generationType": 0,
+          "isDone": true,
+          "description": "Main application component managing state, layout, and processing workflow.",
+          "diffs": [
+            {
+              "target": "",
+              "replacement": "\nimport React, { useState, useRef, useCallback } from 'react';\nimport { AppStatus, StructuredReport } from './types';\nimport { transcribeAudio, refineMedicalReport } from './services/geminiService';\n\nconst App: React.FC = () => {\n  const [status, setStatus] = useState<AppStatus>(AppStatus.IDLE);\n  const [error, setError] = useState<string | null>(null);\n  const [report, setReport] = useState<StructuredReport | null>(null);\n  const [audioUrl, setAudioUrl] = useState<string | null>(null);\n  const fileInputRef = useRef<HTMLInputElement>(null);\n\n  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {\n    const file = event.target.files?.[0];\n    if (!file) return;\n    processAudioFile(file);\n  };\n\n  const processAudioFile = async (file: File) => {\n    try {\n      setStatus(AppStatus.UPLOADING);\n      setError(null);\n      setAudioUrl(URL.createObjectURL(file));\n\n      // Convert file to base64\n      const reader = new FileReader();\n      const base64Promise = new Promise<string>((resolve) => {\n        reader.onload = () => {\n          const base64 = (reader.result as string).split(',')[1];\n          resolve(base64);\n        };\n      });\n      reader.readAsDataURL(file);\n      const base64Audio = await base64Promise;\n\n      // 1. Transcription (Flash)\n      setStatus(AppStatus.TRANSCRIBING);\n      const rawText = await transcribeAudio(base64Audio, file.type);\n\n      // 2. Refinement (Pro + Thinking)\n      setStatus(AppStatus.REFINING);\n      const structuredData = await refineMedicalReport(rawText);\n\n      setReport(structuredData);\n      setStatus(AppStatus.COMPLETED);\n    } catch (err: any) {\n      console.error(err);\n      setError(err.message || 'An error occurred during processing.');\n      setStatus(AppStatus.ERROR);\n    }\n  };\n\n  const downloadDoc = () => {\n    if (!report) return;\n\n    const content = `\n      <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>\n      <head><meta charset='utf-8'><title>Medical Report</title></head>\n      <body>\n        <h1 style=\"text-align:center; color:#0f172a;\">Medical Report</h1>\n        <hr/>\n        ${report.patientInfo ? `<h3>Patient Information</h3><p>${report.patientInfo}</p>` : ''}\n        ${report.clinicalHistory ? `<h3>Clinical History</h3><p>${report.clinicalHistory}</p>` : ''}\n        <h3>Findings</h3><p>${report.findings}</p>\n        <h3>Diagnosis</h3><p>${report.diagnosis}</p>\n        <h3>Plan</h3><p>${report.plan}</p>\n        <br/>\n        <hr/>\n        <p style=\"font-size:10px; color:#64748b;\">Generated by MedScribe AI on ${new Date().toLocaleDateString()}</p>\n      </body>\n      </html>\n    `;\n\n    const blob = new Blob(['\\ufeff', content], {\n      type: 'application/msword'\n    });\n\n    const url = URL.createObjectURL(blob);\n    const link = document.createElement('a');\n    link.href = url;\n    link.download = `Medical_Report_${new Date().getTime()}.doc`;\n    document.body.appendChild(link);\n    link.click();\n    document.body.removeChild(link);\n  };\n\n  const reset = () => {\n    setStatus(AppStatus.IDLE);\n    setReport(null);\n    setAudioUrl(null);\n    setError(null);\n  };\n\n  return (\n    <div className=\"min-h-screen bg-slate-50 flex flex-col items-center py-12 px-4\">\n      <header className=\"max-w-4xl w-full mb-12 text-center\">\n        <div className=\"flex items-center justify-center space-x-3 mb-4\">\n          <div className=\"bg-blue-600 p-3 rounded-2xl shadow-lg shadow-blue-200\">\n            <i className=\"fa-solid fa-notes-medical text-white text-3xl\"></i>\n          </div>\n          <h1 className=\"text-4xl font-extrabold text-slate-900 tracking-tight\">MedScribe <span className=\"text-blue-600\">AI</span></h1>\n        </div>\n        <p className=\"text-slate-500 text-lg\">Intelligent Medical Transcription & Report Structuring</p>\n      </header>\n\n      <main className=\"max-w-4xl w-full\">\n        {status === AppStatus.IDLE && (\n          <div \n            onClick={() => fileInputRef.current?.click()}\n            className=\"group cursor-pointer bg-white border-2 border-dashed border-slate-300 rounded-3xl p-16 text-center transition-all hover:border-blue-500 hover:bg-blue-50/50\"\n          >\n            <input \n              type=\"file\" \n              accept=\"audio/*\" \n              className=\"hidden\" \n              ref={fileInputRef} \n              onChange={handleFileChange}\n            />\n            <div className=\"bg-slate-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-100 transition-colors\">\n              <i className=\"fa-solid fa-cloud-arrow-up text-slate-400 text-3xl group-hover:text-blue-600\"></i>\n            </div>\n            <h2 className=\"text-2xl font-bold text-slate-800 mb-2\">Upload Voice Report</h2>\n            <p className=\"text-slate-500 max-w-sm mx-auto\">\n              Drag and drop your audio file or click to browse. Supports WAV, MP3, M4A, etc.\n            </p>\n          </div>\n        )}\n\n        {(status === AppStatus.UPLOADING || status === AppStatus.TRANSCRIBING || status === AppStatus.REFINING) && (\n          <div className=\"bg-white rounded-3xl p-12 shadow-xl shadow-slate-200 text-center border border-slate-100\">\n            <div className=\"relative w-24 h-24 mx-auto mb-8\">\n              <div className=\"absolute inset-0 border-4 border-slate-100 rounded-full\"></div>\n              <div className=\"absolute inset-0 border-4 border-blue-600 rounded-full border-t-transparent animate-spin\"></div>\n            </div>\n            <h3 className=\"text-2xl font-bold text-slate-900 mb-4\">\n              {status === AppStatus.UPLOADING && 'Uploading Medical Data...'}\n              {status === AppStatus.TRANSCRIBING && 'Transcribing Voice Record...'}\n              {status === AppStatus.REFINING && 'Analyzing & Structuring Report...'}\n            </h3>\n            <p className=\"text-slate-500 italic max-w-md mx-auto\">\n              {status === AppStatus.TRANSCRIBING && 'Gemini Flash is converting your voice report to text with clinical precision.'}\n              {status === AppStatus.REFINING && 'Gemini Pro is applying reasoning to structure your report into professional sections.'}\n            </p>\n          </div>\n        )}\n\n        {status === AppStatus.ERROR && (\n          <div className=\"bg-red-50 border border-red-100 rounded-3xl p-8 text-center\">\n            <i className=\"fa-solid fa-circle-exclamation text-red-500 text-4xl mb-4\"></i>\n            <h3 className=\"text-xl font-bold text-red-900 mb-2\">Processing Error</h3>\n            <p className=\"text-red-700 mb-6\">{error}</p>\n            <button \n              onClick={reset}\n              className=\"bg-white border border-red-200 text-red-600 px-6 py-2 rounded-xl font-medium hover:bg-red-100 transition-colors\"\n            >\n              Try Again\n            </button>\n          </div>\n        )}\n\n        {status === AppStatus.COMPLETED && report && (\n          <div className=\"space-y-6\">\n            <div className=\"bg-white rounded-3xl p-8 shadow-xl shadow-slate-200 border border-slate-100\">\n              <div className=\"flex items-center justify-between mb-8 pb-4 border-b border-slate-100\">\n                <h2 className=\"text-2xl font-bold text-slate-900 flex items-center\">\n                  <i className=\"fa-solid fa-file-medical text-blue-600 mr-3\"></i>\n                  Clinical Report Result\n                </h2>\n                <div className=\"flex space-x-2\">\n                  <button \n                    onClick={downloadDoc}\n                    className=\"flex items-center space-x-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200\"\n                  >\n                    <i className=\"fa-solid fa-file-word\"></i>\n                    <span>Download .doc</span>\n                  </button>\n                  <button \n                    onClick={reset}\n                    className=\"flex items-center space-x-2 bg-slate-100 text-slate-600 px-5 py-2.5 rounded-xl font-bold hover:bg-slate-200 transition-all\"\n                  >\n                    <i className=\"fa-solid fa-rotate-left\"></i>\n                    <span>New Transcription</span>\n                  </button>\n                </div>\n              </div>\n\n              {audioUrl && (\n                <div className=\"mb-8 p-4 bg-slate-50 rounded-2xl flex items-center space-x-4\">\n                  <i className=\"fa-solid fa-circle-play text-blue-500 text-xl\"></i>\n                  <audio src={audioUrl} controls className=\"w-full h-10 accent-blue-600\" />\n                </div>\n              )}\n\n              <div className=\"grid grid-cols-1 gap-8\">\n                {report.patientInfo && (\n                  <Section title=\"Patient Information\" content={report.patientInfo} icon=\"fa-user-md\" />\n                )}\n                <Section title=\"Clinical History\" content={report.clinicalHistory} icon=\"fa-clock-rotate-left\" />\n                <Section title=\"Findings & Observations\" content={report.findings} icon=\"fa-stethoscope\" highlight />\n                <Section title=\"Diagnosis / Assessment\" content={report.diagnosis} icon=\"fa-microscope\" />\n                <Section title=\"Plan & Recommendations\" content={report.plan} icon=\"fa-clipboard-check\" />\n                \n                <div className=\"mt-8 pt-6 border-t border-slate-100\">\n                  <details className=\"group\">\n                    <summary className=\"cursor-pointer text-slate-400 font-medium flex items-center hover:text-slate-600 transition-colors\">\n                      <i className=\"fa-solid fa-chevron-right mr-2 transition-transform group-open:rotate-90\"></i>\n                      View Raw Transcription\n                    </summary>\n                    <div className=\"mt-4 p-4 bg-slate-50 rounded-xl text-slate-600 text-sm leading-relaxed whitespace-pre-wrap\">\n                      {report.originalText}\n                    </div>\n                  </details>\n                </div>\n              </div>\n            </div>\n          </div>\n        )}\n      </main>\n\n      <footer className=\"mt-auto pt-12 pb-6 text-slate-400 text-sm\">\n        <p>© 2024 MedScribe AI. Secure Clinical Documentation Interface.</p>\n      </footer>\n    </div>\n  );\n};\n\ninterface SectionProps {\n  title: string;\n  content?: string;\n  icon: string;\n  highlight?: boolean;\n}\n\nconst Section: React.FC<SectionProps> = ({ title, content, icon, highlight }) => {\n  if (!content) return null;\n  return (\n    <div className={`p-6 rounded-2xl border ${highlight ? 'bg-blue-50/30 border-blue-100' : 'bg-white border-slate-100'}`}>\n      <h3 className=\"flex items-center text-lg font-bold text-slate-800 mb-3\">\n        <i className={`fa-solid ${icon} text-blue-500 mr-2 opacity-70`}></i>\n        {title}\n      </h3>\n      <div className=\"text-slate-600 leading-relaxed whitespace-pre-wrap\">\n        {content}\n      </div>\n    </div>\n  );\n};\n\nexport default App;\n"
+            }
+          ]
+        }
+      ]
+    },
+    "createdTimestamp": {
+      "seconds": 1768327420,
+      "nanos": 172000000
+    },
+    "doneTimestamp": {
+      "seconds": 1768327420,
+      "nanos": 333000000
+    }
+  },
+  {
+    "id": 16,
+    "author": "user",
+    "payload": {
+      "type": "text",
+      "text": "En los audios siempre se mencionan los puntos y comas, deben interpretarse y no incluirse en la transcripción. Las mas comunes son:\nPunto aparte, punto y coma",
+      "files": [],
+      "fileUploads": [],
+      "cMarkNode": {}
+    },
+    "createdTimestamp": {
+      "seconds": 1768328204,
+      "nanos": 82000000
+    }
+  },
+  {
+    "id": 17,
+    "author": "model",
+    "payload": {
+      "type": "thinking",
+      "text": "**Defining Transcription Needs**\n\nI'm currently focused on pinpointing the specific requirements for refining the medical transcription application. I've identified the need to accurately transcribe spoken punctuation, like \"punto aparte\" and \"punto y coma,\" into the correct symbols. This is the main focus of my attention right now, and I'm considering the best approach.\n\n\n**Refining Punctuation Handling**\n\nI'm now focusing on a more concrete implementation plan. I've decided to update the system prompt in `services/geminiService.ts` to explicitly instruct the model on handling spoken punctuation. Specifically, I will include instructions for \"punto aparte\" (paragraph break) and \"punto y coma\" (semicolon). The goal is for the model to interpret these commands and insert the appropriate formatting, ensuring the medical terminology remains central. I anticipate this will significantly improve the accuracy of transcriptions.\n\n\n**Improving Output Aesthetics**\n\nI recognize that while this update is functional, there's an opportunity to subtly enhance the visual appeal of the output. I don't see any immediate need for visual changes, but I anticipate the \"Raw Transcription\" and \"Structured Report\" text to be more polished as a result of the changes. This will make the user experience feel significantly improved in the longer term.\n\n\n",
+      "cMarkNode": {}
+    },
+    "createdTimestamp": {
+      "seconds": 1768328204,
+      "nanos": 82000000
+    },
+    "doneTimestamp": {
+      "seconds": 1768328209,
+      "nanos": 476000000
+    }
+  },
+  {
+    "id": 18,
+    "author": "model",
+    "payload": {
+      "type": "generationTable",
+      "entries": [
+        {
+          "path": "services/geminiService.ts",
+          "generationType": 1,
+          "isDone": true,
+          "description": "Update transcription prompt to interpret spoken punctuation commands like 'punto aparte' and 'punto y coma'.",
+          "diffs": [
+            {
+              "target": "",
+              "replacement": "\nimport { GoogleGenAI, Type } from \"@google/genai\";\nimport { StructuredReport } from \"../types\";\n\nconst getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });\n\n/**\n * Transcribes audio data using gemini-3-flash-preview\n */\nexport async function transcribeAudio(base64Audio: string, mimeType: string): Promise<string> {\n  const ai = getAI();\n  const response = await ai.models.generateContent({\n    model: 'gemini-3-flash-preview',\n    contents: {\n      parts: [\n        {\n          inlineData: {\n            mimeType: mimeType,\n            data: base64Audio,\n          },\n        },\n        {\n          text: `Transcribe este reporte médico de voz de forma literal pero interpretando los comandos de puntuación dictados. \n          \n          REGLAS CRÍTICAS:\n          1. NO escribas las palabras de puntuación. Interprétalas.\n          2. \"punto aparte\" o \"punto seguido\" deben convertirse en el signo '.' y un salto de línea si es aparte.\n          3. \"punto y coma\" debe convertirse en el signo ';'.\n          4. \"coma\" debe convertirse en ','.\n          5. \"dos puntos\" debe convertirse en ':'.\n          6. Mantén todos los términos médicos técnicos con absoluta precisión.\n          7. El resultado debe ser un texto fluido y correctamente puntuado, listo para ser leído como un documento profesional.`,\n        },\n      ],\n    },\n  });\n\n  return response.text || \"\";\n}\n\n/**\n * Refines raw transcription into a structured medical report using gemini-3-pro-preview with Thinking Mode\n */\nexport async function refineMedicalReport(rawText: string): Promise<StructuredReport> {\n  const ai = getAI();\n  const response = await ai.models.generateContent({\n    model: 'gemini-3-pro-preview',\n    contents: `\n      Convert the following medical transcription into a structured medical report.\n      The text already contains punctuation. Your job is to organize it into professional sections.\n      Use professional medical terminology. \n      Identify and separate information into these categories: \n      - Patient Identification (if mentioned)\n      - Clinical History\n      - Physical Examination/Findings\n      - Diagnostic Impression\n      - Treatment Plan/Recommendations\n\n      Raw Transcription:\n      ${rawText}\n    `,\n    config: {\n      thinkingConfig: { thinkingBudget: 32768 },\n      responseMimeType: \"application/json\",\n      responseSchema: {\n        type: Type.OBJECT,\n        properties: {\n          patientInfo: { type: Type.STRING, description: \"Patient name, age, etc.\" },\n          clinicalHistory: { type: Type.STRING, description: \"Symptoms and background.\" },\n          findings: { type: Type.STRING, description: \"Physical exam or test results.\" },\n          diagnosis: { type: Type.STRING, description: \"Assessment or diagnosis.\" },\n          plan: { type: Type.STRING, description: \"Treatment and follow-up.\" },\n        },\n        required: [\"findings\", \"diagnosis\", \"plan\"],\n      }\n    },\n  });\n\n  try {\n    const data = JSON.parse(response.text || \"{}\");\n    return {\n      ...data,\n      originalText: rawText\n    };\n  } catch (e) {\n    console.error(\"Failed to parse AI response as JSON\", e);\n    return {\n      findings: \"Error processing report structure.\",\n      diagnosis: \"Could not structure data.\",\n      plan: \"Please review raw text.\",\n      originalText: rawText\n    };\n  }\n}\n"
+            }
+          ]
+        }
+      ]
+    },
+    "createdTimestamp": {
+      "seconds": 1768328209,
+      "nanos": 476000000
+    },
+    "doneTimestamp": {
+      "seconds": 1768328213,
+      "nanos": 953000000
+    }
+  },
+  {
+    "id": 19,
+    "author": "user",
+    "payload": {
+      "type": "text",
+      "text": "okey, pero el doc descargado debe ser de la transcripcion del texto unicamente formateado",
+      "files": [],
+      "fileUploads": [],
+      "cMarkNode": {}
+    },
+    "createdTimestamp": {
+      "seconds": 1768328340,
+      "nanos": 143000000
+    }
+  },
+  {
+    "id": 20,
+    "author": "model",
+    "payload": {
+      "type": "thinking",
+      "text": "**Isolating Transcription Text**\n\nI'm now focusing on extracting and formatting just the raw transcription text from the `.doc` file. I'm moving away from generating a full structured report and instead concentrating on properly interpreting punctuation cues within the text itself. The goal is a clean, formatted text output.\n\n\n**Refining Download Logic**\n\nI'm now prioritizing the download function, specifically. My focus is now on extracting the *uniquely formatted* transcription text. I'll swap the `downloadDoc` function to prioritize outputting the `originalText` derived from the audio transcription. While the UI can still showcase structured info, the download itself should be the clean transcription, as requested.\n\n\n**Adjusting Download Output**\n\nI'm now revising the download logic within `App.tsx` to prioritize the \"originalText\", the cleaned transcription. It's becoming the core of the downloaded document. I'll include line breaks for better readability. I'll preserve the structured UI for the \"Intelligent Medical Transcription\" interface. The goal is a professional-looking, single-section medical note.\n\n\n**Updating Download Output Again**\n\nI'm now revising the download logic further in `App.tsx` again. I'm focusing on incorporating the request for a \"clean prose\" transcription in the download. I'm ensuring `report.originalText` from `structuredData.originalText` will be the sole content. I'm updating `downloadDoc` to use this, which will become the core text. I'll also rename labels for clarity, so that the download is definitely the \"Transcription.\"\n\n\n**Clarifying Data Flow**\n\nI'm verifying the data flow; `rawText` directly feeds `originalText` within the `refineMedicalReport` process, which is exactly as I intended. I also double-checked that the `StructuredReport` interface definition aligns with this. The `.doc` output will focus on the clean transcription. Newlines from `originalText` will be replaced with line breaks or `<p>` tags for improved document formatting. The goal is a clean, professional medical document output. I'm focusing on the `downloadDoc` function, so it can display the correct content.\n\n\n**Verifying Prompt Accuracy**\n\nI'm now revisiting the `transcribeAudio` prompt again, to confirm that it delivers a \"formateado\" result, meaning well-punctuated and paragraphed text, per the user's instructions. I'll modify the `StructuredReport` interface to focus on `originalText`. The goal is to retain the structured UI while prioritizing the specific download requirement. I'm focusing on these updates within `App.tsx`.\n\n\n",
+      "cMarkNode": {}
+    },
+    "createdTimestamp": {
+      "seconds": 1768328340,
+      "nanos": 143000000
+    },
+    "doneTimestamp": {
+      "seconds": 1768328353,
+      "nanos": 350000000
+    }
+  },
+  {
+    "id": 21,
+    "author": "model",
+    "payload": {
+      "type": "generationTable",
+      "entries": [
+        {
+          "path": "App.tsx",
+          "generationType": 1,
+          "isDone": true,
+          "description": "Update downloadDoc to generate a Word document focused solely on the cleaned, formatted transcription text as requested by the user.",
+          "diffs": [
+            {
+              "target": "",
+              "replacement": "\nimport React, { useState, useRef, useCallback } from 'react';\nimport { AppStatus, StructuredReport } from './types';\nimport { transcribeAudio, refineMedicalReport } from './services/geminiService';\n\nconst App: React.FC = () => {\n  const [status, setStatus] = useState<AppStatus>(AppStatus.IDLE);\n  const [error, setError] = useState<string | null>(null);\n  const [report, setReport] = useState<StructuredReport | null>(null);\n  const [audioUrl, setAudioUrl] = useState<string | null>(null);\n  const fileInputRef = useRef<HTMLInputElement>(null);\n\n  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {\n    const file = event.target.files?.[0];\n    if (!file) return;\n    processAudioFile(file);\n  };\n\n  const processAudioFile = async (file: File) => {\n    try {\n      setStatus(AppStatus.UPLOADING);\n      setError(null);\n      setAudioUrl(URL.createObjectURL(file));\n\n      // Convert file to base64\n      const reader = new FileReader();\n      const base64Promise = new Promise<string>((resolve) => {\n        reader.onload = () => {\n          const base64 = (reader.result as string).split(',')[1];\n          resolve(base64);\n        };\n      });\n      reader.readAsDataURL(file);\n      const base64Audio = await base64Promise;\n\n      // 1. Transcription (Flash) - Interprets punctuation like \"punto aparte\"\n      setStatus(AppStatus.TRANSCRIBING);\n      const rawText = await transcribeAudio(base64Audio, file.type);\n\n      // 2. Refinement (Pro + Thinking) - Structures for UI display\n      setStatus(AppStatus.REFINING);\n      const structuredData = await refineMedicalReport(rawText);\n\n      setReport(structuredData);\n      setStatus(AppStatus.COMPLETED);\n    } catch (err: any) {\n      console.error(err);\n      setError(err.message || 'An error occurred during processing.');\n      setStatus(AppStatus.ERROR);\n    }\n  };\n\n  const downloadDoc = () => {\n    if (!report) return;\n\n    // We use originalText which contains the cleaned transcription with interpreted punctuation\n    const formattedText = report.originalText.replace(/\\n/g, '<br/>');\n\n    const content = `\n      <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>\n      <head><meta charset='utf-8'><title>Transcripción Médica</title></head>\n      <body>\n        <div style=\"font-family: 'Arial', sans-serif; max-width: 800px; margin: auto; padding: 20px;\">\n          <h1 style=\"text-align:center; color:#1e293b; border-bottom: 2px solid #3b82f6; padding-bottom: 10px;\">REPORTE DE TRANSCRIPCIÓN MÉDICA</h1>\n          <p style=\"text-align: right; font-size: 12px; color: #64748b;\">Fecha: ${new Date().toLocaleDateString()}</p>\n          <div style=\"margin-top: 30px; line-height: 1.6; color: #334155; font-size: 14pt;\">\n            ${formattedText}\n          </div>\n          <br/><br/>\n          <hr style=\"border: 0; border-top: 1px solid #e2e8f0;\" />\n          <p style=\"font-size: 10px; color: #94a3b8; text-align: center;\">Documento generado automáticamente por MedScribe AI</p>\n        </div>\n      </body>\n      </html>\n    `;\n\n    const blob = new Blob(['\\ufeff', content], {\n      type: 'application/msword'\n    });\n\n    const url = URL.createObjectURL(blob);\n    const link = document.createElement('a');\n    link.href = url;\n    link.download = `Transcripcion_Medica_${new Date().getTime()}.doc`;\n    document.body.appendChild(link);\n    link.click();\n    document.body.removeChild(link);\n  };\n\n  const reset = () => {\n    setStatus(AppStatus.IDLE);\n    setReport(null);\n    setAudioUrl(null);\n    setError(null);\n  };\n\n  return (\n    <div className=\"min-h-screen bg-slate-50 flex flex-col items-center py-12 px-4\">\n      <header className=\"max-w-4xl w-full mb-12 text-center\">\n        <div className=\"flex items-center justify-center space-x-3 mb-4\">\n          <div className=\"bg-blue-600 p-3 rounded-2xl shadow-lg shadow-blue-200\">\n            <i className=\"fa-solid fa-notes-medical text-white text-3xl\"></i>\n          </div>\n          <h1 className=\"text-4xl font-extrabold text-slate-900 tracking-tight\">MedScribe <span className=\"text-blue-600\">AI</span></h1>\n        </div>\n        <p className=\"text-slate-500 text-lg\">Transcripción Médica Inteligente</p>\n      </header>\n\n      <main className=\"max-w-4xl w-full\">\n        {status === AppStatus.IDLE && (\n          <div \n            onClick={() => fileInputRef.current?.click()}\n            className=\"group cursor-pointer bg-white border-2 border-dashed border-slate-300 rounded-3xl p-16 text-center transition-all hover:border-blue-500 hover:bg-blue-50/50\"\n          >\n            <input \n              type=\"file\" \n              accept=\"audio/*\" \n              className=\"hidden\" \n              ref={fileInputRef} \n              onChange={handleFileChange}\n            />\n            <div className=\"bg-slate-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-100 transition-colors\">\n              <i className=\"fa-solid fa-microphone-lines text-slate-400 text-3xl group-hover:text-blue-600\"></i>\n            </div>\n            <h2 className=\"text-2xl font-bold text-slate-800 mb-2\">Subir Audio Médico</h2>\n            <p className=\"text-slate-500 max-w-sm mx-auto\">\n              Sube tu archivo de voz. Se interpretarán comandos como \"punto aparte\" y \"punto y coma\".\n            </p>\n          </div>\n        )}\n\n        {(status === AppStatus.UPLOADING || status === AppStatus.TRANSCRIBING || status === AppStatus.REFINING) && (\n          <div className=\"bg-white rounded-3xl p-12 shadow-xl shadow-slate-200 text-center border border-slate-100\">\n            <div className=\"relative w-24 h-24 mx-auto mb-8\">\n              <div className=\"absolute inset-0 border-4 border-slate-100 rounded-full\"></div>\n              <div className=\"absolute inset-0 border-4 border-blue-600 rounded-full border-t-transparent animate-spin\"></div>\n            </div>\n            <h3 className=\"text-2xl font-bold text-slate-900 mb-4\">\n              {status === AppStatus.UPLOADING && 'Subiendo Audio...'}\n              {status === AppStatus.TRANSCRIBING && 'Transcribiendo Reporte...'}\n              {status === AppStatus.REFINING && 'Analizando Contenido...'}\n            </h3>\n            <p className=\"text-slate-500 italic max-w-md mx-auto\">\n              {status === AppStatus.TRANSCRIBING && 'Limpiando comandos de puntuación y convirtiendo voz a texto profesional.'}\n              {status === AppStatus.REFINING && 'Organizando la información para visualización estructurada.'}\n            </p>\n          </div>\n        )}\n\n        {status === AppStatus.ERROR && (\n          <div className=\"bg-red-50 border border-red-100 rounded-3xl p-8 text-center\">\n            <i className=\"fa-solid fa-circle-exclamation text-red-500 text-4xl mb-4\"></i>\n            <h3 className=\"text-xl font-bold text-red-900 mb-2\">Error de Procesamiento</h3>\n            <p className=\"text-red-700 mb-6\">{error}</p>\n            <button \n              onClick={reset}\n              className=\"bg-white border border-red-200 text-red-600 px-6 py-2 rounded-xl font-medium hover:bg-red-100 transition-colors\"\n            >\n              Intentar de nuevo\n            </button>\n          </div>\n        )}\n\n        {status === AppStatus.COMPLETED && report && (\n          <div className=\"space-y-6\">\n            <div className=\"bg-white rounded-3xl p-8 shadow-xl shadow-slate-200 border border-slate-100\">\n              <div className=\"flex items-center justify-between mb-8 pb-4 border-b border-slate-100\">\n                <h2 className=\"text-2xl font-bold text-slate-900 flex items-center\">\n                  <i className=\"fa-solid fa-file-medical text-blue-600 mr-3\"></i>\n                  Reporte Generado\n                </h2>\n                <div className=\"flex space-x-2\">\n                  <button \n                    onClick={downloadDoc}\n                    title=\"Descargar transcripción limpia\"\n                    className=\"flex items-center space-x-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200\"\n                  >\n                    <i className=\"fa-solid fa-file-word\"></i>\n                    <span>Bajar Transcripción (.doc)</span>\n                  </button>\n                  <button \n                    onClick={reset}\n                    className=\"flex items-center space-x-2 bg-slate-100 text-slate-600 px-5 py-2.5 rounded-xl font-bold hover:bg-slate-200 transition-all\"\n                  >\n                    <i className=\"fa-solid fa-rotate-left\"></i>\n                    <span>Nuevo</span>\n                  </button>\n                </div>\n              </div>\n\n              {audioUrl && (\n                <div className=\"mb-8 p-4 bg-slate-50 rounded-2xl flex items-center space-x-4\">\n                  <i className=\"fa-solid fa-circle-play text-blue-500 text-xl\"></i>\n                  <audio src={audioUrl} controls className=\"w-full h-10 accent-blue-600\" />\n                </div>\n              )}\n\n              {/* Structured View in UI for convenience */}\n              <div className=\"grid grid-cols-1 gap-6\">\n                <div className=\"p-6 bg-slate-50 rounded-2xl border border-slate-200\">\n                  <h3 className=\"text-sm font-bold text-slate-400 uppercase tracking-wider mb-4\">Texto de Transcripción (Formateado)</h3>\n                  <div className=\"text-slate-800 leading-relaxed whitespace-pre-wrap text-lg\">\n                    {report.originalText}\n                  </div>\n                </div>\n\n                <div className=\"mt-4\">\n                  <h3 className=\"text-sm font-bold text-slate-400 uppercase tracking-wider mb-4\">Resumen Estructurado</h3>\n                  <div className=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n                    {report.patientInfo && (\n                      <MiniSection title=\"Paciente\" content={report.patientInfo} icon=\"fa-user\" />\n                    )}\n                    <MiniSection title=\"Diagnóstico\" content={report.diagnosis} icon=\"fa-microscope\" />\n                    <MiniSection title=\"Plan\" content={report.plan} icon=\"fa-clipboard-check\" />\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n        )}\n      </main>\n\n      <footer className=\"mt-auto pt-12 pb-6 text-slate-400 text-sm\">\n        <p>© 2024 MedScribe AI. Interfaz Segura para Documentación Clínica.</p>\n      </footer>\n    </div>\n  );\n};\n\nconst MiniSection: React.FC<{ title: string; content?: string; icon: string }> = ({ title, content, icon }) => {\n  if (!content) return null;\n  return (\n    <div className=\"p-4 bg-white rounded-xl border border-slate-100 shadow-sm\">\n      <h4 className=\"flex items-center text-xs font-bold text-blue-600 uppercase mb-2\">\n        <i className={`fa-solid ${icon} mr-1.5`}></i>\n        {title}\n      </h4>\n      <p className=\"text-slate-600 text-sm line-clamp-3\">{content}</p>\n    </div>\n  );\n};\n\nexport default App;\n"
+            }
+          ]
+        }
+      ]
+    },
+    "createdTimestamp": {
+      "seconds": 1768328353,
+      "nanos": 351000000
+    },
+    "doneTimestamp": {
+      "seconds": 1768328372,
+      "nanos": 441000000
+    }
+  },
+  {
+    "id": 22,
+    "author": "model",
+    "payload": {
+      "type": "text",
+      "text": "]]></content>\n  </change>\n</changes>\n",
+      "cMarkNode": {}
+    },
+    "createdTimestamp": {
+      "seconds": 1768328372,
+      "nanos": 441000000
+    },
+    "doneTimestamp": {
+      "seconds": 1768328372,
+      "nanos": 458000000
+    }
+  },
+  {
+    "id": 23,
+    "author": "user",
+    "payload": {
+      "type": "text",
+      "text": "se debe interpretar el audio, por ejemplo en una parte se menciona: No muestran signos de litiasis;  'no a ver ' el izquierdo presenta. Por lo que debe interpretarse y hacer las correcciones en el texto de manera adecuada de acuerdo al audio",
+      "files": [],
+      "fileUploads": [],
+      "cMarkNode": {}
+    },
+    "createdTimestamp": {
+      "seconds": 1768328817,
+      "nanos": 597000000
+    }
+  },
+  {
+    "id": 24,
+    "author": "model",
+    "payload": {
+      "type": "thinking",
+      "text": "**Improving Medical Transcription Accuracy**\n\nI'm focusing on enhancing the AI's ability to understand medical context, especially for Spanish transcription. The goal is to move beyond simple word-for-word transcription and enable the AI to make intelligent, context-aware corrections. I'm currently working on interpreting the audio, specifically addressing nuances in medical terminology like \"No muestran signos de litiasis\" for accuracy.\n\n\n**Refining Spanish Audio Transcription**\n\nI'm now zeroing in on handling hesitations and self-corrections in Spanish audio. The key is in updating `transcribeAudio` to act as an expert medical editor, refining the transcription to make logical sense. This includes cleaning up phrases like \"no a ver\" in context, ensuring the corrected version is downloaded. I'm updating the prompt in `geminiService.ts` to explicitly handle these nuances.\n\n\n**Enhancing Contextual Accuracy**\n\nI'm now integrating a new rule for context correction into the AI's processing. It will proactively remove self-corrections and filler words to ensure medically sound and coherent transcriptions. The prompt is being updated to reflect this new capability, enabling seamless handling of phrases like \"no, a ver\". My aim is to deliver a refined and accurate transcription, devoid of any extraneous elements.\n\n\n",
+      "cMarkNode": {}
+    },
+    "createdTimestamp": {
+      "seconds": 1768328817,
+      "nanos": 597000000
+    },
+    "doneTimestamp": {
+      "seconds": 1768328829,
+      "nanos": 413000000
+    }
+  },
+  {
+    "id": 25,
+    "author": "model",
+    "payload": {
+      "type": "generationTable",
+      "entries": [
+        {
+          "path": "services/geminiService.ts",
+          "generationType": 1,
+          "isDone": true,
+          "description": "Refine the transcription prompt to include expert medical editing logic, handling self-corrections (e.g., \"no a ver\", \"perdón\") and ensuring clinical coherence while following dictated punctuation commands.",
+          "diffs": [
+            {
+              "target": "",
+              "replacement": "\nimport { GoogleGenAI, Type } from \"@google/genai\";\nimport { StructuredReport } from \"../types\";\n\nconst getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });\n\n/**\n * Transcribes audio data using gemini-3-flash-preview\n */\nexport async function transcribeAudio(base64Audio: string, mimeType: string): Promise<string> {\n  const ai = getAI();\n  const response = await ai.models.generateContent({\n    model: 'gemini-3-flash-preview',\n    contents: {\n      parts: [\n        {\n          inlineData: {\n            mimeType: mimeType,\n            data: base64Audio,\n          },\n        },\n        {\n          text: `Actúa como un transcriptor médico experto. Tu tarea es transcribir el audio adjunto siguiendo estas reglas estrictas:\n\n          1. INTERPRETACIÓN DE PUNTUACIÓN:\n             - NO escribas las palabras de puntuación dictadas. Interprétalas directamente en el texto.\n             - \"punto aparte\": Termina el párrafo y comienza uno nuevo.\n             - \"punto seguido\" o \"punto\": Inserta un punto '.' y continúa.\n             - \"punto y coma\": Inserta ';'.\n             - \"coma\": Inserta ','.\n             - \"dos puntos\": Inserta ':'.\n\n          2. EDICIÓN CLÍNICA Y CORRECCIONES (CRÍTICO):\n             - El orador puede cometer errores, dudar o corregirse a sí mismo (ejemplo: \"no muestra signos de... no a ver, presenta...\"). \n             - Debes INTERPRETAR la intención del orador. Si se corrige, elimina la parte errónea o la duda y deja solo la versión final coherente.\n             - Elimina muletillas como \"ehh\", \"mmm\", \"o sea\", \"no a ver\", \"perdón\", \"digo\" cuando se usen como parte de una corrección o duda.\n             - Asegura que la oración final tenga sentido médico y gramatical perfecto.\n\n          3. PRECISIÓN MÉDICA:\n             - Mantén todos los términos técnicos médicos con absoluta precisión.\n             - El resultado debe ser un texto limpio, profesional y listo para un informe clínico formal.\n             \n          Ejemplo de interpretación:\n          Audio: \"Riñón derecho mide... no a ver, riñón izquierdo mide 10 centímetros punto aparte\"\n          Resultado: \"Riñón izquierdo mide 10 centímetros.\"`,\n        },\n      ],\n    },\n  });\n\n  return response.text || \"\";\n}\n\n/**\n * Refines raw transcription into a structured medical report using gemini-3-pro-preview with Thinking Mode\n */\nexport async function refineMedicalReport(rawText: string): Promise<StructuredReport> {\n  const ai = getAI();\n  const response = await ai.models.generateContent({\n    model: 'gemini-3-pro-preview',\n    contents: `\n      Convierte la siguiente transcripción médica en un reporte estructurado.\n      El texto ya ha sido limpiado y puntuado. Tu trabajo es organizarlo en secciones profesionales.\n      Usa terminología médica profesional.\n      Identifica y separa la información en estas categorías: \n      - Identificación del Paciente (si se menciona)\n      - Antecedentes/Historia Clínica\n      - Hallazgos/Exploración\n      - Impresión Diagnóstica\n      - Plan/Recomendaciones\n\n      Transcripción:\n      ${rawText}\n    `,\n    config: {\n      thinkingConfig: { thinkingBudget: 32768 },\n      responseMimeType: \"application/json\",\n      responseSchema: {\n        type: Type.OBJECT,\n        properties: {\n          patientInfo: { type: Type.STRING, description: \"Nombre del paciente, edad, etc.\" },\n          clinicalHistory: { type: Type.STRING, description: \"Síntomas y antecedentes.\" },\n          findings: { type: Type.STRING, description: \"Resultados de exámenes o hallazgos físicos.\" },\n          diagnosis: { type: Type.STRING, description: \"Evaluación o diagnóstico presuntivo.\" },\n          plan: { type: Type.STRING, description: \"Tratamiento y seguimiento.\" },\n        },\n        required: [\"findings\", \"diagnosis\", \"plan\"],\n      }\n    },\n  });\n\n  try {\n    const data = JSON.parse(response.text || \"{}\");\n    return {\n      ...data,\n      originalText: rawText\n    };\n  } catch (e) {\n    console.error(\"Failed to parse AI response as JSON\", e);\n    return {\n      findings: \"Error procesando la estructura del reporte.\",\n      diagnosis: \"No se pudo estructurar la información.\",\n      plan: \"Por favor revise el texto de la transcripción.\",\n      originalText: rawText\n    };\n  }\n}\n"
+            }
+          ]
+        }
+      ]
+    },
+    "createdTimestamp": {
+      "seconds": 1768328829,
+      "nanos": 413000000
+    },
+    "doneTimestamp": {
+      "seconds": 1768328835,
+      "nanos": 549000000
+    }
+  },
+  {
+    "id": 26,
+    "author": "user",
+    "payload": {
+      "type": "text",
+      "text": "quiero hacer estos cambios en el documento .doc:\n1. los saltos de linea no dejen un salto entre lineas\n2. Poner en negrita y subrayado el nombre del estudio al comienzo.\n3. Finalizar con un ATTE en el medio del documento final.\n4. En la linea siguiente sobre el lado derecho, Indicar: Dr. Rubén Luis Brodsky\nEspecialista en Radiología\nM.N. 63574 - M.P. 1601",
+      "files": [],
+      "fileUploads": [],
+      "cMarkNode": {}
+    },
+    "createdTimestamp": {
+      "seconds": 1768339049,
+      "nanos": 455000000
+    }
+  },
+  {
+    "id": 27,
+    "author": "model",
+    "payload": {
+      "type": "thinking",
+      "text": "**Refining Document Formatting**\n\nI'm currently focused on the `.doc` file's appearance. First, I'm working on removing any unwanted line spacing, ensuring a clean and consistent layout. Second, the study name will be prominently displayed at the start, bolded and underlined for emphasis. I'm aiming for a professional presentation.\n\n\n**Revising Document Structure**\n\nI've significantly expanded the scope; the `.doc` updates require a plan now. I'm starting with the data: adding `studyName` to the `StructuredReport` type and the Gemini service to extract it. Then I'll update the `downloadDoc` function in `App.tsx`, and make a few styling changes. Finally, I will add the centered \"ATTE\" and signature line with doctor details to the document. I think this will be an effective, clean implementation.\n\n\n**Enhancing Doc Generation**\n\nI'm now streamlining the `.doc` generation with HTML styling, using `<br/>` for single line spacing to align with the user's preference. I've noted specific styles: underlining and bolding the study name, centering \"ATTE\", and right-aligning doctor details. My focus is now on the `downloadDoc` function in the application, and the AI prompt for Gemini needs an update for `studyName` extraction. The new plan involves type additions, prompt updates, and formatted document handling.\n\n\n**Implement Doctor Details**\n\nMy priority now is implementing the right-aligned, multi-line doctor details. I'm actively updating the necessary files to accommodate this new requirement within the document generation process. The code updates are in progress to ensure the details are correctly formatted and positioned.\n\n\n",
+      "cMarkNode": {}
+    },
+    "createdTimestamp": {
+      "seconds": 1768339049,
+      "nanos": 455000000
+    },
+    "doneTimestamp": {
+      "seconds": 1768339063,
+      "nanos": 737000000
+    }
+  },
+  {
+    "id": 28,
+    "author": "model",
+    "payload": {
+      "type": "generationTable",
+      "entries": [
+        {
+          "path": "types.ts",
+          "generationType": 1,
+          "isDone": true,
+          "description": "Added studyName to StructuredReport interface.",
+          "diffs": [
+            {
+              "target": "",
+              "replacement": "\nexport interface TranscriptionResult {\n  rawText: string;\n  structuredReport: StructuredReport;\n}\n\nexport interface StructuredReport {\n  studyName?: string;\n  patientInfo?: string;\n  clinicalHistory?: string;\n  findings?: string;\n  diagnosis?: string;\n  plan?: string;\n  originalText: string;\n}\n\nexport enum AppStatus {\n  IDLE = 'IDLE',\n  UPLOADING = 'UPLOADING',\n  TRANSCRIBING = 'TRANSCRIBING',\n  REFINING = 'REFINING',\n  COMPLETED = 'COMPLETED',\n  ERROR = 'ERROR'\n}\n"
+            }
+          ]
+        },
+        {
+          "path": "services/geminiService.ts",
+          "generationType": 1,
+          "isDone": true,
+          "description": "Updated refinement prompt to extract the study name for the report header.",
+          "diffs": [
+            {
+              "target": "",
+              "replacement": "\nimport { GoogleGenAI, Type } from \"@google/genai\";\nimport { StructuredReport } from \"../types\";\n\nconst getAI = () => new GoogleGenAI({ apiKey: process.env.API_KEY || '' });\n\n/**\n * Transcribes audio data using gemini-3-flash-preview\n */\nexport async function transcribeAudio(base64Audio: string, mimeType: string): Promise<string> {\n  const ai = getAI();\n  const response = await ai.models.generateContent({\n    model: 'gemini-3-flash-preview',\n    contents: {\n      parts: [\n        {\n          inlineData: {\n            mimeType: mimeType,\n            data: base64Audio,\n          },\n        },\n        {\n          text: `Actúa como un transcriptor médico experto. Tu tarea es transcribir el audio adjunto siguiendo estas reglas estrictas:\n\n          1. INTERPRETACIÓN DE PUNTUACIÓN:\n             - NO escribas las palabras de puntuación dictadas. Interprétalas directamente en el texto.\n             - \"punto aparte\": Termina el párrafo y comienza uno nuevo.\n             - \"punto seguido\" o \"punto\": Inserta un punto '.' y continúa.\n             - \"punto y coma\": Inserta ';'.\n             - \"coma\": Inserta ','.\n             - \"dos puntos\": Inserta ':'.\n\n          2. EDICIÓN CLÍNICA Y CORRECCIONES (CRÍTICO):\n             - El orador puede cometer errores, dudar o corregirse a sí mismo (ejemplo: \"no muestra signos de... no a ver, presenta...\"). \n             - Debes INTERPRETAR la intención del orador. Si se corrige, elimina la parte errónea o la duda y deja solo la versión final coherente.\n             - Elimina muletillas como \"ehh\", \"mmm\", \"o sea\", \"no a ver\", \"perdón\", \"digo\" cuando se usen como parte de una corrección o duda.\n             - Asegura que la oración final tenga sentido médico y gramatical perfecto.\n\n          3. PRECISIÓN MÉDICA:\n             - Mantén todos los términos técnicos médicos con absoluta precisión.\n             - El resultado debe ser un texto limpio, profesional y listo para un informe clínico formal.\n             \n          Ejemplo de interpretación:\n          Audio: \"Riñón derecho mide... no a ver, riñón izquierdo mide 10 centímetros punto aparte\"\n          Resultado: \"Riñón izquierdo mide 10 centímetros.\"`,\n        },\n      ],\n    },\n  });\n\n  return response.text || \"\";\n}\n\n/**\n * Refines raw transcription into a structured medical report using gemini-3-pro-preview with Thinking Mode\n */\nexport async function refineMedicalReport(rawText: string): Promise<StructuredReport> {\n  const ai = getAI();\n  const response = await ai.models.generateContent({\n    model: 'gemini-3-pro-preview',\n    contents: `\n      Convierte la siguiente transcripción médica en un reporte estructurado.\n      El texto ya ha sido limpiado y puntuado. Tu trabajo es organizarlo en secciones profesionales.\n      Usa terminología médica profesional.\n      Identifica y separa la información en estas categorías: \n      - Nombre del estudio (Título principal del examen)\n      - Identificación del Paciente (si se menciona)\n      - Antecedentes/Historia Clínica\n      - Hallazgos/Exploración\n      - Impresión Diagnóstica\n      - Plan/Recomendaciones\n\n      Transcripción:\n      ${rawText}\n    `,\n    config: {\n      thinkingConfig: { thinkingBudget: 32768 },\n      responseMimeType: \"application/json\",\n      responseSchema: {\n        type: Type.OBJECT,\n        properties: {\n          studyName: { type: Type.STRING, description: \"El nombre o título del examen/estudio médico.\" },\n          patientInfo: { type: Type.STRING, description: \"Nombre del paciente, edad, etc.\" },\n          clinicalHistory: { type: Type.STRING, description: \"Síntomas y antecedentes.\" },\n          findings: { type: Type.STRING, description: \"Resultados de exámenes o hallazgos físicos.\" },\n          diagnosis: { type: Type.STRING, description: \"Evaluación o diagnóstico presuntivo.\" },\n          plan: { type: Type.STRING, description: \"Tratamiento y seguimiento.\" },\n        },\n        required: [\"studyName\", \"findings\", \"diagnosis\", \"plan\"],\n      }\n    },\n  });\n\n  try {\n    const data = JSON.parse(response.text || \"{}\");\n    return {\n      ...data,\n      originalText: rawText\n    };\n  } catch (e) {\n    console.error(\"Failed to parse AI response as JSON\", e);\n    return {\n      studyName: \"INFORME MÉDICO\",\n      findings: \"Error procesando la estructura del reporte.\",\n      diagnosis: \"No se pudo estructurar la información.\",\n      plan: \"Por favor revise el texto de la transcripción.\",\n      originalText: rawText\n    };\n  }\n}\n"
+            }
+          ]
+        },
+        {
+          "path": "App.tsx",
+          "generationType": 1,
+          "isDone": true,
+          "description": "Updated downloadDoc with new styling: single line spacing, bold/underlined study name, centered ATTE, and right-aligned signature for Dr. Rubén Luis Brodsky.",
+          "diffs": [
+            {
+              "target": "",
+              "replacement": "\nimport React, { useState, useRef, useCallback } from 'react';\nimport { AppStatus, StructuredReport } from './types';\nimport { transcribeAudio, refineMedicalReport } from './services/geminiService';\n\nconst App: React.FC = () => {\n  const [status, setStatus] = useState<AppStatus>(AppStatus.IDLE);\n  const [error, setError] = useState<string | null>(null);\n  const [report, setReport] = useState<StructuredReport | null>(null);\n  const [audioUrl, setAudioUrl] = useState<string | null>(null);\n  const fileInputRef = useRef<HTMLInputElement>(null);\n\n  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {\n    const file = event.target.files?.[0];\n    if (!file) return;\n    processAudioFile(file);\n  };\n\n  const processAudioFile = async (file: File) => {\n    try {\n      setStatus(AppStatus.UPLOADING);\n      setError(null);\n      setAudioUrl(URL.createObjectURL(file));\n\n      // Convert file to base64\n      const reader = new FileReader();\n      const base64Promise = new Promise<string>((resolve) => {\n        reader.onload = () => {\n          const base64 = (reader.result as string).split(',')[1];\n          resolve(base64);\n        };\n      });\n      reader.readAsDataURL(file);\n      const base64Audio = await base64Promise;\n\n      // 1. Transcription (Flash) - Interprets punctuation like \"punto aparte\"\n      setStatus(AppStatus.TRANSCRIBING);\n      const rawText = await transcribeAudio(base64Audio, file.type);\n\n      // 2. Refinement (Pro + Thinking) - Structures for UI display\n      setStatus(AppStatus.REFINING);\n      const structuredData = await refineMedicalReport(rawText);\n\n      setReport(structuredData);\n      setStatus(AppStatus.COMPLETED);\n    } catch (err: any) {\n      console.error(err);\n      setError(err.message || 'An error occurred during processing.');\n      setStatus(AppStatus.ERROR);\n    }\n  };\n\n  const downloadDoc = () => {\n    if (!report) return;\n\n    // Replace actual newlines with single <br/> to avoid large spacing\n    const formattedText = report.originalText.trim().replace(/\\n/g, '<br/>');\n\n    const content = `\n      <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>\n      <head>\n        <meta charset='utf-8'>\n        <title>Reporte Médico</title>\n        <style>\n          p, div { margin: 0; padding: 0; line-height: 1.2; }\n          .study-name { text-decoration: underline; font-weight: bold; font-size: 14pt; margin-bottom: 20px; text-transform: uppercase; }\n          .content { font-family: 'Arial', sans-serif; font-size: 12pt; margin-top: 10px; }\n          .signature-atte { text-align: center; margin-top: 40px; font-weight: bold; }\n          .signature-details { text-align: right; margin-top: 10px; font-size: 11pt; }\n        </style>\n      </head>\n      <body>\n        <div class=\"study-name\">\n          ${report.studyName || 'REPORTE MÉDICO'}\n        </div>\n        \n        <div class=\"content\">\n          ${formattedText}\n        </div>\n\n        <div class=\"signature-atte\">\n          ATTE\n        </div>\n\n        <div class=\"signature-details\">\n          Dr. Rubén Luis Brodsky<br/>\n          Especialista en Radiología<br/>\n          M.N. 63574 - M.P. 1601\n        </div>\n      </body>\n      </html>\n    `;\n\n    const blob = new Blob(['\\ufeff', content], {\n      type: 'application/msword'\n    });\n\n    const url = URL.createObjectURL(blob);\n    const link = document.createElement('a');\n    link.href = url;\n    link.download = `${(report.studyName || 'Transcripcion').replace(/\\s+/g, '_')}_${new Date().getTime()}.doc`;\n    document.body.appendChild(link);\n    link.click();\n    document.body.removeChild(link);\n  };\n\n  const reset = () => {\n    setStatus(AppStatus.IDLE);\n    setReport(null);\n    setAudioUrl(null);\n    setError(null);\n  };\n\n  return (\n    <div className=\"min-h-screen bg-slate-50 flex flex-col items-center py-12 px-4\">\n      <header className=\"max-w-4xl w-full mb-12 text-center\">\n        <div className=\"flex items-center justify-center space-x-3 mb-4\">\n          <div className=\"bg-blue-600 p-3 rounded-2xl shadow-lg shadow-blue-200\">\n            <i className=\"fa-solid fa-notes-medical text-white text-3xl\"></i>\n          </div>\n          <h1 className=\"text-4xl font-extrabold text-slate-900 tracking-tight\">MedScribe <span className=\"text-blue-600\">AI</span></h1>\n        </div>\n        <p className=\"text-slate-500 text-lg\">Transcripción Médica Inteligente</p>\n      </header>\n\n      <main className=\"max-w-4xl w-full\">\n        {status === AppStatus.IDLE && (\n          <div \n            onClick={() => fileInputRef.current?.click()}\n            className=\"group cursor-pointer bg-white border-2 border-dashed border-slate-300 rounded-3xl p-16 text-center transition-all hover:border-blue-500 hover:bg-blue-50/50\"\n          >\n            <input \n              type=\"file\" \n              accept=\"audio/*\" \n              className=\"hidden\" \n              ref={fileInputRef} \n              onChange={handleFileChange}\n            />\n            <div className=\"bg-slate-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-100 transition-colors\">\n              <i className=\"fa-solid fa-microphone-lines text-slate-400 text-3xl group-hover:text-blue-600\"></i>\n            </div>\n            <h2 className=\"text-2xl font-bold text-slate-800 mb-2\">Subir Audio Médico</h2>\n            <p className=\"text-slate-500 max-w-sm mx-auto\">\n              Sube tu archivo de voz. Se interpretarán comandos y correcciones automáticamente.\n            </p>\n          </div>\n        )}\n\n        {(status === AppStatus.UPLOADING || status === AppStatus.TRANSCRIBING || status === AppStatus.REFINING) && (\n          <div className=\"bg-white rounded-3xl p-12 shadow-xl shadow-slate-200 text-center border border-slate-100\">\n            <div className=\"relative w-24 h-24 mx-auto mb-8\">\n              <div className=\"absolute inset-0 border-4 border-slate-100 rounded-full\"></div>\n              <div className=\"absolute inset-0 border-4 border-blue-600 rounded-full border-t-transparent animate-spin\"></div>\n            </div>\n            <h3 className=\"text-2xl font-bold text-slate-900 mb-4\">\n              {status === AppStatus.UPLOADING && 'Subiendo Audio...'}\n              {status === AppStatus.TRANSCRIBING && 'Transcribiendo Reporte...'}\n              {status === AppStatus.REFINING && 'Analizando Contenido...'}\n            </h3>\n            <p className=\"text-slate-500 italic max-w-md mx-auto\">\n              {status === AppStatus.TRANSCRIBING && 'Procesando correcciones de voz y puntuación clínica.'}\n              {status === AppStatus.REFINING && 'Identificando el nombre del estudio y estructurando secciones.'}\n            </p>\n          </div>\n        )}\n\n        {status === AppStatus.ERROR && (\n          <div className=\"bg-red-50 border border-red-100 rounded-3xl p-8 text-center\">\n            <i className=\"fa-solid fa-circle-exclamation text-red-500 text-4xl mb-4\"></i>\n            <h3 className=\"text-xl font-bold text-red-900 mb-2\">Error de Procesamiento</h3>\n            <p className=\"text-red-700 mb-6\">{error}</p>\n            <button \n              onClick={reset}\n              className=\"bg-white border border-red-200 text-red-600 px-6 py-2 rounded-xl font-medium hover:bg-red-100 transition-colors\"\n            >\n              Intentar de nuevo\n            </button>\n          </div>\n        )}\n\n        {status === AppStatus.COMPLETED && report && (\n          <div className=\"space-y-6\">\n            <div className=\"bg-white rounded-3xl p-8 shadow-xl shadow-slate-200 border border-slate-100\">\n              <div className=\"flex items-center justify-between mb-8 pb-4 border-b border-slate-100\">\n                <div className=\"flex flex-col\">\n                  <span className=\"text-xs font-bold text-blue-600 uppercase tracking-widest mb-1\">Estudio Detectado</span>\n                  <h2 className=\"text-2xl font-bold text-slate-900 flex items-center\">\n                    <i className=\"fa-solid fa-file-medical text-blue-600 mr-3\"></i>\n                    {report.studyName}\n                  </h2>\n                </div>\n                <div className=\"flex space-x-2\">\n                  <button \n                    onClick={downloadDoc}\n                    title=\"Descargar transcripción limpia\"\n                    className=\"flex items-center space-x-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200\"\n                  >\n                    <i className=\"fa-solid fa-file-word\"></i>\n                    <span>Bajar Transcripción (.doc)</span>\n                  </button>\n                  <button \n                    onClick={reset}\n                    className=\"flex items-center space-x-2 bg-slate-100 text-slate-600 px-5 py-2.5 rounded-xl font-bold hover:bg-slate-200 transition-all\"\n                  >\n                    <i className=\"fa-solid fa-rotate-left\"></i>\n                    <span>Nuevo</span>\n                  </button>\n                </div>\n              </div>\n\n              {audioUrl && (\n                <div className=\"mb-8 p-4 bg-slate-50 rounded-2xl flex items-center space-x-4\">\n                  <i className=\"fa-solid fa-circle-play text-blue-500 text-xl\"></i>\n                  <audio src={audioUrl} controls className=\"w-full h-10 accent-blue-600\" />\n                </div>\n              )}\n\n              <div className=\"grid grid-cols-1 gap-6\">\n                <div className=\"p-6 bg-slate-50 rounded-2xl border border-slate-200\">\n                  <h3 className=\"text-sm font-bold text-slate-400 uppercase tracking-wider mb-4\">Texto Final de la Transcripción</h3>\n                  <div className=\"text-slate-800 leading-relaxed whitespace-pre-wrap text-lg\">\n                    {report.originalText}\n                  </div>\n                </div>\n\n                <div className=\"mt-4\">\n                  <h3 className=\"text-sm font-bold text-slate-400 uppercase tracking-wider mb-4\">Resumen de Análisis</h3>\n                  <div className=\"grid grid-cols-1 md:grid-cols-2 gap-4\">\n                    {report.patientInfo && (\n                      <MiniSection title=\"Paciente\" content={report.patientInfo} icon=\"fa-user\" />\n                    )}\n                    <MiniSection title=\"Hallazgos\" content={report.findings} icon=\"fa-stethoscope\" />\n                    <MiniSection title=\"Diagnóstico\" content={report.diagnosis} icon=\"fa-microscope\" />\n                    <MiniSection title=\"Plan\" content={report.plan} icon=\"fa-clipboard-check\" />\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n        )}\n      </main>\n\n      <footer className=\"mt-auto pt-12 pb-6 text-slate-400 text-sm\">\n        <p>© 2024 MedScribe AI. Firmado por Dr. Rubén Luis Brodsky.</p>\n      </footer>\n    </div>\n  );\n};\n\nconst MiniSection: React.FC<{ title: string; content?: string; icon: string }> = ({ title, content, icon }) => {\n  if (!content) return null;\n  return (\n    <div className=\"p-4 bg-white rounded-xl border border-slate-100 shadow-sm\">\n      <h4 className=\"flex items-center text-xs font-bold text-blue-600 uppercase mb-2\">\n        <i className={`fa-solid ${icon} mr-1.5`}></i>\n        {title}\n      </h4>\n      <p className=\"text-slate-600 text-sm line-clamp-3\">{content}</p>\n    </div>\n  );\n};\n\nexport default App;\n"
+            }
+          ]
+        }
+      ]
+    },
+    "createdTimestamp": {
+      "seconds": 1768339063,
+      "nanos": 737000000
+    },
+    "doneTimestamp": {
+      "seconds": 1768339064,
+      "nanos": 3000000
+    }
+  }
+]
